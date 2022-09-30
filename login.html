@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <script type="text/javascript" src="rem.js"></script>
+    <link type="text/css" rel="stylesheet" href="com.css" /> 
+    <style>
+        
+        .main-login-contain {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            width: 16rem;
+            height: 6rem;
+            /* border: 1px solid black; */
+            display: flex;
+
+        }
+
+        .login-img {
+            width: 50%;
+            background: url('./web/icon_login_bg.png') no-repeat;
+            background-size: 100% 100%;
+            float: left;
+        }
+
+        .login-form {
+            width: 50%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center-box {
+            width: 2.87rem;
+        }
+
+        section {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .title-img {
+            height: 0.44rem;
+            width: 100%;
+            background: url('./web/login_logo.png') no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .input-form {
+            font-size: 14px;
+            margin: 70px 0 29px 0;
+        }
+
+        .forget {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .input {
+            width: inherit;
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #dadada;
+            position: relative;
+            padding-left: 35px;
+        }
+        .input:focus{
+            border: 1px solid #da4851;
+        }
+
+        .ico {
+            position: absolute;
+            z-index: 1;
+            height: 20px;
+            width: 20px;
+            left: 10px;
+            top: 10px;
+        }
+
+        .btn {
+            background-color: #fff;
+            border: 1px solid #dadada;
+            color: #dadada;
+            border-radius: 5px;
+            width: 3rem;
+            padding: 0.13rem 0 0.13rem 0;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #da4851;
+            color: #fff;
+        }
+
+        .btn:active {
+            background-color: #a71e32;
+            color: #fff;
+        }
+
+        .switch {
+            position: relative;
+            background-color: #dadada;
+            width: 40px;
+            height: 20px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            -webkit-appearance: none;
+            transition: all .2s ease;
+        }
+
+        .switch::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: all .2s ease;
+        }
+
+        .switch:checked {
+            background-color: #da4851;
+        }
+
+        .switch:checked::after {
+            left: 50%;
+        }
+
+        /* .switch:hover{
+            background-color: #86c0fa;
+        }
+        .switch:hover::after {
+            left: 50%;
+        } */
+    </style>
+</head>
+
+
+<body>
+    <div class="main-login-contain bg">
+        <div class="login-box">
+            <div class="login-img"></div>
+            <div class="login-form">
+                <div class="center-box">
+                    <section>
+                        <div class="title-img"></div>
+                    </section>
+                    <div class="input-form" style="width:100%;">
+                        <div style="width:100%;position: relative;"><img src="./web/icon_login_input01.png" class="ico"></i><input style="margin-bottom:34px"
+                                class="input" placeholder="此处输入账户" />
+                        </div>
+                        <div style="width:100%;position: relative;"> <img src="./web/icon_login_input02.png" class="ico"></i><input class="input"
+                                placeholder="此处输入密码"></div>
+                    </div>
+                    <div class="forget">
+                        <div style="display: flex;">
+                            <input style="cursor:pointer;margin-right: 15px;" class='switch' type='checkbox'>
+                            记住密码
+                        </div>
+                        <div><a href="#" style="text-decoration:none">忘记密码?</a></div>
+                    </div>
+                    <div style="font-size:15px;margin-top: 41px;">
+                        <input class="btn" type="button" value="登录" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

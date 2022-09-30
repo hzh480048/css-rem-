@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权限管理</title>
+    <script type="text/javascript" src="rem.js"></script>
+    <script type="text/javascript" src="tree.js"></script>
+    <link type="text/css" rel="stylesheet" href="com.css" />
+    <style>
+        .container {
+            height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            height: 0.62rem;
+            background-color: #a61f31;
+            color: #fff
+        }
+
+        .information {
+            float: right;
+
+        }
+
+        .information ul::after {
+            content: '';
+            clear: both;
+            display: block;
+            overflow: hidden;
+        }
+
+        .information ul {
+            list-style: none;
+            display: inline;
+        }
+
+        .information ul li {
+            width: 0.62rem;
+            height: .62rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            float: left;
+        }
+
+        .information ul li:hover {
+            transform: translateY(-5%);
+            /* transform:scale(1.1); */
+            background-color: #c01d33;
+        }
+
+        .information ul li>img {
+            width: .25rem;
+            height: .25rem;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .user {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .user>img {
+            width: .45rem;
+            height: .45rem;
+            padding: 0.0521rem;
+        }
+
+        .crumbs {
+            height: 0.64rem;
+            background-color: #fff;
+            padding-left: 2.7rem;
+            justify-content: flex-start;
+        }
+
+        .crumbs-box {
+            background-color: #f2f6fa;
+            font-size: 0.0729rem;
+            padding: 0.026rem 0.0781rem;
+            position: relative;
+            border-radius: 0.0104rem;
+            cursor: pointer;
+            margin-right: 0.1042rem;
+        }
+
+        .crumbs-box:hover {
+            background-color: #a61f31;
+            color: #fff;
+        }
+
+        .crumbs-box:hover .close::after,
+        .crumbs-box:hover .close::before {
+            background-color: #fff;
+        }
+
+        .close {
+            font-size: 0.0625rem;
+            position: relative;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            overflow: hidden;
+            vertical-align: middle;
+            text-align: center;
+            cursor: pointer;
+            left: 0.0156rem;
+            padding: 0.0104rem;
+            border-radius: 1.2em;
+        }
+
+        .close:hover {
+            background-color: #da485e;
+        }
+
+        .close::after,
+        .close::before {
+            content: '';
+            position: absolute;
+            width: 0.0104rem;
+            height: 1em;
+            background-color: inherit;
+            z-index: 11;
+            background-color: black;
+        }
+
+        .close::after {
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg)
+        }
+
+        .close::before {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg)
+        }
+
+        .logo {
+            height: 0.62rem;
+            background-image: url(./web/login_logo.png);
+            background-repeat: no-repeat;
+            background-position-x: -10%;
+            background-size: 156% 77%;
+            background-position-y: 61%;
+            cursor: pointer;
+            margin-bottom: 0.43rem;
+        }
+
+        .nav {
+            position: absolute;
+            width: 2.3rem;
+            height: 100vh;
+            background-color: #fff;
+            border-right: 1px solid #eee;
+        }
+
+        .menu-box {
+            height: calc(100vh - 1.25rem);
+            margin-bottom: .2rem;
+            overflow: auto;
+            /* padding: 0 .3rem; */
+        }
+
+        .menu-box-item {
+            position: relative;
+            justify-content: flex-start;
+            border-radius: 2px;
+        }
+
+        .menu-box-item:hover {
+            background-color: #a61f31;
+            color: #fff;
+        }
+
+        .menu-box-item .img {
+            background: url('./web/icon_menucomm_01.png');
+            margin-right: 0.14rem;
+            width: 0.2rem;
+            height: 0.2rem;
+            background-size:cover ;
+            
+        }
+
+        .menu-box-item .img:hover .menu-box-item .img {
+            background: url('./web/icon_menucomm_on01.png');
+        }
+
+        .drop-ico {
+            position: absolute;
+            width: 0.15rem;
+            height: 0.15rem;
+            background: url('./web/icon_menutree_02.png');
+            right: 0.0521rem;
+            background-size: cover;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .drop-ico-open {
+            background: url('./web/icon_menutree_01.png');
+            height: 0.0104rem;
+        }
+
+        .drop-menu-open {
+            display: none;
+        }
+
+        .drop-menu {
+            background-color: #f2f6fa;
+            height: 0px;
+            overflow: hidden;
+            transition: all .35s;
+        }
+
+        .drop-menu,
+        .menu-box {
+            font-size: 0.0729rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .drop-menu-item {
+            justify-content: center;
+        }
+
+        .drop-menu-item:hover {
+            background-color: rgba(230, 230, 230, 1);
+        }
+
+        .drop-menu-item,
+        .menu-box-item {
+            width: 1.7rem;
+            font-size: 0.0729rem;
+            font-weight: bold;
+            display: flex;
+            padding: 0.0521rem;
+            cursor: pointer;
+        }
+
+        .main {
+            height: auto;
+            padding: 0.0521rem;
+            background: #fff;
+            font-size: 0.0781rem;
+            width: calc(100vw - 2.9rem);
+            margin: 0.0521rem 0.0521rem 0 0.0521rem;
+            float: right;
+            display: flex;
+        }
+
+        .main .tree {
+            width: 2.9rem;
+        }
+
+        .show-box {
+            flex: 1;
+        }
+
+        .show-box .search {
+            display: inline-block;
+            margin: 0.1042rem 0;
+            vertical-align: middle;
+        }
+
+        .hover-bnt-r:hover {
+            background: #da485e;
+            color: #fff;
+        }
+
+        .table-opertion {
+            padding: 0.0521rem 0.0521rem;
+            background-color: #f6f6f6;
+        }
+
+        .table-opertion>img {
+            cursor: pointer;
+            margin-left: 0.0521rem;
+            transition: all .3s;
+        }
+
+        .table-opertion>img:hover {
+            transform: translateY(-10%);
+        }
+
+        .show-box .table td {
+            background-color: #fff;
+        }
+
+        .show-box .table th {
+            background-color: #f6f6f6;
+        }
+
+        table {
+            border-spacing: 1px;
+        }
+
+        table thead,
+        tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            /*重要  表格固定算法*/
+        }
+
+        tbody tr:hover>td {
+            background: #faeafa !important;
+        }
+
+        table tbody {
+            display: block;
+            height: auto;
+            max-height: 6.42rem;
+            overflow-y: scroll;
+        }
+
+        table thead {
+            /*留出滚动条的位置*/
+            width: calc(100% - 1em)
+        }
+
+        table thead th {
+            background: #ccc;
+        }
+
+        th,
+        td {
+            height: 0.1354rem;
+            padding: 0.0313rem 0.0208rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .hide-from {
+            width: inherit;
+            display: inline-block;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 0.1042rem 0;
+        }
+
+        .close-form {
+            overflow: hidden;
+            display: inline-block;
+            border-top: none;
+            border-bottom: none;
+            padding: 0 0;
+        }
+
+        .input-dialog-w50 {
+            width: calc(50% - 0.026rem) !important;
+        }
+
+        .input-dialog-w25 {
+            width: calc(25% - 0.0521rem) !important;
+        }
+
+        .input-dialog-w25>input,
+        .input-dialog-w25>select {
+            min-width: 4%
+        }
+    </style>
+    <script>
+        let hideFrom = false
+        let index;
+        let dropFlag = false;
+        function toggleDrop() {
+            var dom = document.getElementsByClassName('drop-menu')[0]
+            var height = document.getElementsByClassName('drop-menu-item')
+            var ico = document.getElementsByClassName('drop-ico')[0]
+            dropFlag = !dropFlag
+            if (!dropFlag) {
+                dom.classList.remove('drop-menu-open')
+                ico.classList.remove('drop-ico-open')
+                dom.style.height = '0px'
+            }
+            if (dropFlag) {
+                dom.classList.add('drop-menu-open')
+                ico.classList.add('drop-ico-open')
+                dom.style.height = height.length * height[0].offsetHeight + 'px'
+            }
+
+        }
+        function taggleFrom(isOpen) {
+            hideFrom = isOpen
+            let dom = document.getElementsByClassName('hide-from')[0]
+            if (hideFrom == 'true') {
+                dom.style.height = 'auto'
+                dom.classList.remove('close-form')
+            }
+            if (hideFrom == 'false') {
+                dom.style.height = '0px'
+                dom.classList.add('close-form')
+            }
+        }
+        function handleTip(index) {
+            let diloag = document.getElementsByClassName('modal')[index]
+            diloag.style.display = 'flex'
+        }
+        function closeTip(index) {
+            diloag = document.getElementsByClassName('modal')[index]
+            diloag.style.display = 'none'
+        }
+        function sortTable(obj) {
+            var tableNode = document.getElementsByTagName("table")[1]
+            var headRows = tableNode.rows[0].innerText.split('\t')
+            var newRows = tableNode.rows
+            index = headRows.indexOf(obj.parentNode.innerText)
+            let sortArray = Array.from(newRows).sort(sort)
+            for (let i = 0; sortArray.length > i; i++) {
+                newRows[i] = sortArray[i]
+            }
+            // document.getElementsByTagName("tbody")[1].innerHTML = sortArray
+        }
+        function sort(b, a) {
+            return a.cells[index].innerText - b.cells[index].innerText
+        }
+    </script>
+</head>
+
+<body>
+    <div class="bg container">
+        <nav class="nav">
+            <div class="logo"></div>
+            <div class="menu-box">
+                <div>
+                    <div class="menu-box-item" onclick="toggleDrop()">
+                        <!-- <img src="./web/icon_menucomm_01.png"> -->
+                        <div class="img"></div>
+                        <div>客户管理</div>
+                        <i  class="drop-ico"></i>
+                    </div>
+                    <div class="drop-menu">
+                        <div class="drop-menu-item">客户数据导入</div>
+                        <div class="drop-menu-item">客户信息导入</div>
+                    </div>
+                </div>
+
+                <div class="menu-box-item">
+                    <div class="img"></div>
+                    <div>商机管理</div>
+                </div>
+                <div class="menu-box-item">
+                    <div class="img"></div>
+                    <div>利率管理</div>
+                </div>
+            </div>
+        </nav>
+        <header class="header">
+            <div class="information">
+                <ul>
+                    <li> <img src="./web/icon_topmenu_01.png" /></li>
+                    <li> <img src="./web/icon_topmenu_02.png" /></li>
+                    <li style="width: auto;margin: 0 0.0521rem;transition:none">
+                        <div class="user"><img style="width: inherit;" src="./web/icon_usercommtest.png" /></div>
+                        <div style="font-size: 0.0729rem;">
+                            <div style="font-weight: bold;margin-bottom: 0.026rem;">李欣然</div>
+                            <div style="font-size: 0.0625rem;">客户经理</div>
+                        </div>
+                    </li>
+                    <li> <img src="./web/icon_topmenu_03.png" /></li>
+                </ul>
+            </div>
+        </header>
+        <div class="crumbs flex-center">
+            <div class="crumbs-box">权限管理 <i class="close"></i></div>
+            <div class="crumbs-box">客户管理 <i class="close"></i></div>
+            <div class="crumbs-box">客户数据 <i class="close"></i></div>
+        </div>
+
+        <div class="main">
+            <div id="tree" class="tree"></div>
+            <div class="show-box">
+                <div class="search">
+                    <div class="package-input">
+                        <div class="pre-input">开户机构</div>
+                        <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <input type="button" class="bnt hover-bnt-r" style="border: 1px solid #f5f5f5;" value="查询">
+                </div>
+                <div class="table">
+                    <div class="table-opertion">
+                        <img src='./web/icon_table_03.png' />
+                        <img src='./web/icon_table_02.png' />
+                    </div>
+                    <table width="100%" bgcolor="#cccccc" align="center">
+                        <thead>
+                            <tr>
+                                <th class="font-center"><input type="checkbox" /></th>
+                                <th class="font-center">权限类型</th>
+                                <th class="font-center">权限名称</th>
+                                <th class="font-center">父权限</th>
+                                <th class="font-center">授权访问路径</th>
+                                <th class="font-center">排序的标记</th>
+                                <th class="font-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img onclick="handleTip(0)" style="cursor: pointer;margin-right: 0.026rem;"
+                                        src="./web/icon_table_01.png" />
+                                    <img onclick="handleTip(1)" style="cursor: pointer;margin-left: 0.026rem;"
+                                        src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="font-center">
+                                    <input type="checkbox" />
+                                </td>
+                                <td class="font-center">添加参数</td>
+                                <td class="font-center">功能</td>
+                                <td class="font-center">参数管理</td>
+                                <td class="font-center">xxxxxxxx</td>
+                                <td class="font-center">801</td>
+                                <td class="font-center">
+                                    <img style="cursor: pointer;margin-right: 0.026rem;" src="./web/icon_table_01.png" />
+                                    <img style="cursor: pointer;margin-left: 0.026rem;" src="./web/icon_table_02.png" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <span style="margin-left:0.1042rem;" class="pre">
+                            < </span>
+                                <div style="margin-left: 0.1042rem;" class="list">
+                                    <input type="button" class="bnt hover-bnt-r" style="border: 1px solid #f5f5f5;"
+                                        value="1">
+                                    <input type="button" class="bnt hover-bnt-r" style="border: 1px solid #f5f5f5;"
+                                        value="2">
+                                </div>
+                                <span style="margin-left:0.1042rem;" class="back">></span>
+                                <div style="margin-left:0.1042rem;">
+                                    <span style="font-size: 0.0677rem;">到第 </span>
+                                    <input style="margin: 0 0.1042rem" size="1">
+                                    <span style="font-size: 0.0677rem;"> 页</span>
+                                </div>
+                                <div style="margin-left:0.1042rem;">
+                                    <input type="button" class="bnt hover-bnt-r"
+                                        style="border: 1px solid #f5f5f5;padding: 0.0313rem 0.0521rem;" value="确定">
+                                </div>
+                                <span style="margin-left:0.1042rem;">共 11 条</span>
+                                <select style="margin-left:0.1042rem;height: inherit;">
+                                    <option>10条/页</option>
+                                    <option>20条/页</option>
+                                    <option>50条/页</option>
+                                    <option>100条/页</option>
+                                </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal">
+            <div class="dialog">
+                <header class="header">新增客户信息
+                    <img onclick="closeTip(0)" class="dialog-close" src="./web/icon_comm_14.png" />
+                </header>
+                <div class="dialog-body">
+                    <div class="package-input input-dialog-w50">
+                        <div class="pre-input">开户机构</div>
+                        <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <div class="package-input input-dialog-w50" style="margin-right: 0px;">
+                        <div class="pre-input">客户号</div>
+                        <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <div class="package-input input-dialog-w50">
+                        <div class="pre-input">客户名称</div>
+                        <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <div class="package-input input-dialog-w50" style="margin-right: 0px;">
+                        <div class="pre-input">客户经理</div>
+                        <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <div class="hide-from">
+                        <h5 style="margin-bottom: 0.1042rem;letter-spacing:2px;font-size: 16px;">添加联系人</h5>
+                        <div class="package-input input-dialog-w50">
+                            <div class="pre-input">联系人</div>
+                            <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                        <div class="package-input input-dialog-w50" style="margin-right: 0px;">
+                            <div class="pre-input">姓名</div>
+                            <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                        <div class="package-input input-dialog-w50">
+                            <div class="pre-input">电话</div>
+                            <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                        <div class="package-input input-dialog-w50" style="margin-right: 0px;">
+                            <div class="pre-input">职务</div>
+                            <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                        <div class="package-input" style="margin-right: 0px;width: 100%;">
+                            <div class="pre-input">备注</div>
+                            <input style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                        <div style="display: inline-block;width: 100%;text-align: center;">
+                            <button onclick="taggleFrom('false')" class="bnt hover-bnt-r"
+                                style="border: 1px solid #f5f5f5;text-align: center;padding: 0.0313rem 0px;">
+                                <img style="padding-right: 0.026rem;vertical-align: middle;"
+                                    src="./web/icon_btncomm_02.png" />
+                                删除联系人
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <footer class="diloag-foot">
+                    <button onclick="taggleFrom('true')" class="bnt hover-bnt-r flex-center"
+                        style="border: 1px solid #f5f5f5;margin-right:0.0521rem">
+                        <img style="padding-right: 0.026rem;" src="./web/icon_btncomm_01.png" />
+                        添加联系人
+                    </button>
+                    <button class="bnt hover-bnt-r" style="border: 1px solid #f5f5f5;margin-left:0.0521rem">提交</button>
+                </footer>
+            </div>
+        </div>
+
+        <div class="modal">
+            <div class="dialog" style="width: 60%;">
+                <header class="header">客户全部信息
+                    <img onclick="closeTip(1)" class="dialog-close" src="./web/icon_comm_14.png" />
+                </header>
+                <div class="dialog-body">
+                    <div class="package-input input-dialog-w25">
+                        <div class="pre-input">开户机构</div>
+                        <input disabled style="padding-left: 0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <div class="package-input input-dialog-w25">
+                        <div class="pre-input">客户号</div>
+                        <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <div class="package-input input-dialog-w25">
+                        <div class="pre-input">客户名称</div>
+                        <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <div class="package-input input-dialog-w25" style="margin-right: 0px;">
+                        <div class="pre-input">客户经理</div>
+                        <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                    </div>
+                    <div class="hide-from">
+                        <h5 style="margin-bottom: 0.1042rem;letter-spacing:2px;font-size: 0.0833rem;">联系人信息</h5>
+                        <div class="package-input input-dialog-w25">
+                            <div class="pre-input">联系人</div>
+                            <!-- <input style="margin-left:0.026rem;" placeholder="请输入权限名称"> -->
+                            <select disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                                <option>111111</option>
+                                <option>111111</option>
+                            </select>
+                        </div>
+                        <div class="package-input input-dialog-w25">
+                            <div class="pre-input">姓名</div>
+                            <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                        <div class="package-input input-dialog-w25">
+                            <div class="pre-input">电话</div>
+                            <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                        <div class="package-input input-dialog-w25" style="margin-right: 0px;">
+                            <div class="pre-input">职务</div>
+                            <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                        <div class="package-input" style="margin-right: 0px;width: 100%;">
+                            <div class="pre-input">备注</div>
+                            <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                        </div>
+                    </div>
+                    <div>
+                        <h5 style="margin-top: 0.1042rem;letter-spacing:2px;font-size: 0.0833rem;">客户联络记录</h5>
+                        <div class="show-box">
+                            <div class="table" style="margin-top: 0.1042rem;">
+                                <table width="100%" bgcolor="#cccccc" align="center">
+                                    <thead>
+                                        <tr>
+                                            <th class="font-center">序号<img onclick="sortTable(this)"
+                                                    style="font-size: 0.0781rem;margin-left:0.0521rem;cursor: pointer;"
+                                                    src='./web/icon_comm_01.png'></th>
+                                            <th class="font-center">权限类型</th>
+                                            <th class="font-center">权限名称</th>
+                                            <th class="font-center">父权限</th>
+                                            <th class="font-center">授权访问路径</th>
+                                            <th class="font-center">排序的标记</th>
+                                            <th class="font-center">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-center">
+                                                1
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img onclick="handleTip(0)" style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img onclick="handleTip(1)" style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                2
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                3
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                4
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                5
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                6
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                7
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                8
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                9
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-center">
+                                                10
+                                            </td>
+                                            <td class="font-center">添加参数</td>
+                                            <td class="font-center">功能</td>
+                                            <td class="font-center">参数管理</td>
+                                            <td class="font-center">xxxxxxxx</td>
+                                            <td class="font-center">801</td>
+                                            <td class="font-center">
+                                                <img style="cursor: pointer;margin-right: 0.026rem;"
+                                                    src="./web/icon_table_01.png" />
+                                                <img style="cursor: pointer;margin-left: 0.026rem;"
+                                                    src="./web/icon_table_02.png" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pagination">
+                                    <span style="margin-left:0.1042rem;" class="pre"> < </span>
+                                            <div style="margin-left:0.1042rem;" class="list">
+                                                <input type="button" class="bnt hover-bnt-r"
+                                                    style="border: 1px solid #f5f5f5;" value="1">
+                                                <input type="button" class="bnt hover-bnt-r"
+                                                    style="border: 1px solid #f5f5f5;" value="2">
+                                            </div>
+                                            <span style="margin-left:0.1042rem;" class="back">></span>
+                                            <div style="margin-left:0.1042rem;">
+                                                <span style="font-size: 0.0677rem;">到第 </span>
+                                                <input style="margin: 0 0.1042rem" size="1">
+                                                <span style="font-size: 0.0677rem;"> 页</span>
+                                            </div>
+                                            <div style="margin-left:0.1042rem;">
+                                                <input type="button" class="bnt hover-bnt-r"
+                                                    style="border: 1px solid #f5f5f5;padding: 0.0313rem 0.0521rem;" value="确定">
+                                            </div>
+                                            <span style="margin-left:0.1042rem;">共 11 条</span>
+                                            <select style="margin-left:0.1042rem;height: inherit;">
+                                                <option>10条/页</option>
+                                                <option>20条/页</option>
+                                                <option>50条/页</option>
+                                                <option>100条/页</option>
+                                            </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

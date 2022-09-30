@@ -1,0 +1,176 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.bg {
+    background: url('./web/icon_login_bgmax.png') no-repeat;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    color: #909399;
+    border: 1px solid #dcdfe6;
+    border-radius: 0.0208rem;
+    padding: 0.026rem;
+    white-space: nowrap;
+}
+
+select {
+    border-radius: 0.0208rem;
+    border: 1px solid #dcdfe6;
+    padding: 0.026rem;
+}
+
+.package-input {
+    display: flex;
+    float: left;
+    margin-right: 0.0521rem;
+}
+
+.package-input .pre-input {
+    color: #909399;
+    border: 1px solid #dcdfe6;
+    border-radius: 0.0208rem;
+    padding: 0.026rem 0.1042rem;
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    white-space: nowrap;
+}
+
+.package-input input,
+.package-input select {
+    border: 1px solid #dcdfe6;
+    border-radius: 0.0208rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.bnt {
+    font-size: 0.0729rem;
+    padding: 0.08rem 0.06rem;
+    border-radius: 0.026rem;
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.font-center {
+    text-align: center !important
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    float: right;
+    margin-top: 0.0521rem;
+}
+.pagination input{
+    text-align: center;
+}
+.pagination .bnt{
+    width: auto !important;
+    box-shadow: none !important;
+}
+.pagination .pre,
+.pagination .back {
+    font-size: 0.0833rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.pagination .pre:hover,
+.pagination .back:hover {
+    color: rgba(0, 0, 0);
+}
+
+.pagination .list>input[type='button'] {
+    padding: 0.0313rem 0.0521rem;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    margin: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.dialog {
+    width: 50%;
+    margin-top: 5%;
+    background-color: #fff;
+    border-radius: 0.0417rem;
+    font-size: 0.0781rem;
+    font-weight: bold;
+    margin-bottom: 0.1042rem;
+    box-shadow: 0 0.9984px 2.9952px rgb(0 0 0 / 30%);
+    height: fit-content;
+}
+
+.dialog .header {
+    background-color: #d9495d;
+    border-top-left-radius: 0.0417rem;
+    border-top-right-radius: 0.0417rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog .header .dialog-close {
+    position: absolute;
+    right: .3rem;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.dialog .header .dialog-close:hover {
+    transform: rotate(-90deg)
+}
+
+.dialog .dialog-body {
+    padding: 0.1042rem;
+    overflow: auto;
+}
+
+.dialog .dialog-body .package-input {
+    margin-bottom: 0.1042rem;
+    width: 1.5625rem;
+}
+
+.dialog .dialog-body .package-input input,
+.dialog .dialog-body .package-input select {
+    flex: 1;
+}
+
+.dialog .dialog-body .package-input select[disabled] {
+    background-color: rgba(239, 239, 239, 0.3);
+    color: rgb(84, 84, 84);
+}
+
+.dialog .diloag-foot {
+    padding: 0.1042rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog .bnt {
+    width: 1.26rem;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+}

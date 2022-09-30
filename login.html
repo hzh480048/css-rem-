@@ -7,9 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>首页</title>
     <script type="text/javascript" src="rem.js"></script>
-    <link type="text/css" rel="stylesheet" href="com.css" /> 
+    <link type="text/css" rel="stylesheet" href="com.css" />
     <style>
-        
         .main-login-contain {
             height: 100vh;
             display: flex;
@@ -58,44 +57,47 @@
         }
 
         .input-form {
-            font-size: 14px;
-            margin: 70px 0 29px 0;
+            font-size: 0.0729rem;
+            margin: 0.7rem 0 0.3rem 0;
         }
 
         .forget {
             display: flex;
             justify-content: space-between;
-            font-size: 14px;
+            font-size: 0.0729rem;
             font-weight: bold;
         }
 
         .input {
             width: inherit;
             box-sizing: border-box;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 0.0521rem;
+            border-radius: 0.026rem;
             border: 1px solid #dadada;
             position: relative;
-            padding-left: 35px;
+            padding-left: 0.423rem;
+            font-size: 0.0729rem;
         }
-        .input:focus{
+
+        .input:focus {
             border: 1px solid #da4851;
         }
 
         .ico {
             position: absolute;
             z-index: 1;
-            height: 20px;
-            width: 20px;
-            left: 10px;
-            top: 10px;
+            height: 0.2rem;
+            width: 0.2rem;
+            left: 0.1rem;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .btn {
             background-color: #fff;
             border: 1px solid #dadada;
             color: #dadada;
-            border-radius: 5px;
+            border-radius: 0.026rem;
             width: 3rem;
             padding: 0.13rem 0 0.13rem 0;
             font-weight: bold;
@@ -115,9 +117,9 @@
         .switch {
             position: relative;
             background-color: #dadada;
-            width: 40px;
-            height: 20px;
-            border-radius: 20px;
+            width: 0.36rem;
+            height: 0.18rem;
+            border-radius: 0.09rem;
             border: none;
             outline: none;
             -webkit-appearance: none;
@@ -164,20 +166,22 @@
                         <div class="title-img"></div>
                     </section>
                     <div class="input-form" style="width:100%;">
-                        <div style="width:100%;position: relative;"><img src="./web/icon_login_input01.png" class="ico"></i><input style="margin-bottom:34px"
-                                class="input" placeholder="此处输入账户" />
+                        <div style="width:100%;position: relative;"><img src="./web/icon_login_input01.png"
+                                class="ico"></i><input  class="input"
+                                placeholder="此处输入账户" />
                         </div>
-                        <div style="width:100%;position: relative;"> <img src="./web/icon_login_input02.png" class="ico"></i><input class="input"
-                                placeholder="此处输入密码"></div>
+                        <div style="margin:0.2rem 0;"></div>
+                        <div style="width:100%;position: relative;"> <img src="./web/icon_login_input02.png"
+                                class="ico"></i><input class="input" placeholder="此处输入密码"></div>
                     </div>
                     <div class="forget">
-                        <div style="display: flex;">
-                            <input style="cursor:pointer;margin-right: 15px;" class='switch' type='checkbox'>
+                        <div style="display: flex;align-items: center;">
+                            <input style="cursor:pointer;margin-right: 0.0781rem;" class='switch' type='checkbox'>
                             记住密码
                         </div>
                         <div><a href="#" style="text-decoration:none">忘记密码?</a></div>
                     </div>
-                    <div style="font-size:15px;margin-top: 41px;">
+                    <div style="font-size:0.0781rem;margin-top: 0.42rem;">
                         <input class="btn" type="button" value="登录" />
                     </div>
                 </div>

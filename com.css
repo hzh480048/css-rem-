@@ -37,7 +37,7 @@ select {
     color: #909399;
     border: 1px solid #dcdfe6;
     border-radius: 0.0208rem;
-    padding: 0.026rem 0.1042rem;
+    padding: 0.08rem 0.1042rem;
     border-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -54,7 +54,7 @@ select {
 
 .bnt {
     font-size: 0.0729rem;
-    padding: 0.08rem 0.06rem;
+    padding: 0.08rem 0.2rem;
     border-radius: 0.026rem;
     border: none;
     cursor: pointer;
@@ -171,6 +171,7 @@ select {
 }
 
 .dialog .bnt {
-    width: 1.26rem;
+    width: 2.26rem;
+    height: 0.5rem;
     box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
 }

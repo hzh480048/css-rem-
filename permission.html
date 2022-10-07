@@ -82,12 +82,13 @@
 
         .crumbs-box {
             background-color: #f2f6fa;
-            font-size: 0.0729rem;
+            font-size: 0.12rem;
             padding: 0.026rem 0.0781rem;
             position: relative;
             border-radius: 0.0104rem;
             cursor: pointer;
             margin-right: 0.1042rem;
+            border: 1px solid #eee;
         }
 
         .crumbs-box:hover {
@@ -101,7 +102,7 @@
         }
 
         .close {
-            font-size: 0.0625rem;
+            font-size: 0.1rem;
             position: relative;
             display: inline-block;
             width: 1em;
@@ -167,6 +168,7 @@
         }
 
         .menu-box-item {
+            font-size: .2rem;
             position: relative;
             justify-content: flex-start;
             border-radius: 2px;
@@ -236,7 +238,7 @@
         .drop-menu-item,
         .menu-box-item {
             width: 1.7rem;
-            font-size: 0.0729rem;
+            font-size: 0.15rem;
             font-weight: bold;
             display: flex;
             padding: 0.0521rem;
@@ -258,8 +260,9 @@
 
         .main .tree {
             width: 2.9rem;
-            margin-right: .1rem;
+            margin: .1rem;
             background-color: #a61f31;
+            height: calc(100vh - 2rem);
         }
 
         .show-box {
@@ -330,6 +333,7 @@
 
         table thead th {
             background: #ccc;
+            font-size: .13rem;
         }
 
         th,
@@ -339,6 +343,9 @@
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
+        }
+        td{
+            font-size: .12rem;
         }
 
         .hide-from {
@@ -358,11 +365,11 @@
         }
 
         .input-dialog-w50 {
-            width: calc(50% - 0.026rem) !important;
+            width: calc(50% - 0.1rem) !important;
         }
 
         .input-dialog-w25 {
-            width: calc(25% - 0.0521rem) !important;
+            width: calc(25% - 0.15rem) !important;
         }
 
         .input-dialog-w25>input,
@@ -932,45 +939,45 @@
                     </div>
                     <div class="package-input input-dialog-w25">
                         <div class="pre-input">客户号</div>
-                        <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                        <input disabled  placeholder="请输入权限名称">
                     </div>
                     <div class="package-input input-dialog-w25">
                         <div class="pre-input">客户名称</div>
-                        <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                        <input disabled  placeholder="请输入权限名称">
                     </div>
                     <div class="package-input input-dialog-w25" style="margin-right: 0px;">
                         <div class="pre-input">客户经理</div>
-                        <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                        <input disabled  placeholder="请输入权限名称">
                     </div>
-                    <div class="hide-from">
-                        <h5 style="margin-bottom: 0.1042rem;letter-spacing:2px;font-size: 0.0833rem;">联系人信息</h5>
+                    <div>
+                        <h5>联系人信息</h5>
                         <div class="package-input input-dialog-w25">
                             <div class="pre-input">联系人</div>
                             <!-- <input style="margin-left:0.026rem;" placeholder="请输入权限名称"> -->
-                            <select disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                            <select disabled  placeholder="请输入权限名称">
                                 <option>111111</option>
                                 <option>111111</option>
                             </select>
                         </div>
                         <div class="package-input input-dialog-w25">
                             <div class="pre-input">姓名</div>
-                            <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                            <input disabled placeholder="请输入权限名称">
                         </div>
                         <div class="package-input input-dialog-w25">
                             <div class="pre-input">电话</div>
-                            <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                            <input disabled  placeholder="请输入权限名称">
                         </div>
                         <div class="package-input input-dialog-w25" style="margin-right: 0px;">
                             <div class="pre-input">职务</div>
-                            <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                            <input disabled  placeholder="请输入权限名称">
                         </div>
                         <div class="package-input" style="margin-right: 0px;width: 100%;">
                             <div class="pre-input">备注</div>
-                            <input disabled style="margin-left:0.026rem;" placeholder="请输入权限名称">
+                            <input disabled  placeholder="请输入权限名称">
                         </div>
                     </div>
                     <div>
-                        <h5 style="margin-top: 0.1042rem;letter-spacing:2px;font-size: 0.0833rem;">客户联络记录</h5>
+                        <h5>客户联络记录</h5>
                         <div class="show-box">
                             <div class="table" style="margin-top: 0.1042rem;">
                                 <table width="100%" bgcolor="#cccccc" align="center">

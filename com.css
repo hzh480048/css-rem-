@@ -8,6 +8,10 @@ body,html{
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
 }
+/* input[type="checkbox" i]:checked{
+    color: #fff !important;
+    background-color: #d9495d !important;
+} */
 
 .bg {
     background: url('./web/icon_login_bgmax.png') no-repeat;
@@ -70,6 +74,7 @@ select {
     border: none;
     cursor: pointer;
     background-color: #fff;
+    border: 1px solid #dcdfe6;
 }
 
 .font-center {
@@ -145,6 +150,7 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 0.2rem;
 }
 
 .dialog .header .dialog-close {

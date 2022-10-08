@@ -59,6 +59,7 @@ select {
     border-radius: 0.0208rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    padding-left: 0.1rem;
 }
 
 .bnt {
@@ -160,6 +161,7 @@ select {
 }
 .dialog .dialog-body h5{
     margin-bottom: 0.15rem;
+    margin-top: 0.15rem;
     letter-spacing: 2px;
     font-size: 16px;
 }
@@ -192,6 +194,11 @@ select {
     box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
 }
 
+.clear-float:after{
+    content: '';
+    display: block;
+    clear: both;
+}
 
 .table{
     /* height: calc(100vh - 2rem); */

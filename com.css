@@ -79,7 +79,7 @@ select {
     display: flex;
     align-items: center;
     float: right;
-    margin-top: 0.0521rem;
+    margin: 0.1rem;
 }
 .pagination input{
     text-align: center;

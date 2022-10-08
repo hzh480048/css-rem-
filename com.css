@@ -23,13 +23,13 @@ body,html{
 input {
     color: #909399;
     border: 1px solid #dcdfe6;
-    border-radius: 0.0208rem;
+    border-radius:0.08rem;
     padding: 0.026rem;
     white-space: nowrap;
 }
 
 select {
-    border-radius: 0.0208rem;
+    border-radius:0.08rem;
     border: 1px solid #dcdfe6;
     padding: 0.026rem;
 }
@@ -43,23 +43,24 @@ select {
 .package-input .pre-input {
     color: #909399;
     border: 1px solid #dcdfe6;
-    border-radius: 0.0208rem;
+    border-radius:0.08rem;
     padding: 0.08rem 0.1042rem;
     border-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     white-space: nowrap;
     text-align: center;
-    min-width: .5rem;
+    min-width: .8rem;
 }
 
 .package-input input,
 .package-input select {
     border: 1px solid #dcdfe6;
-    border-radius: 0.0208rem;
+    border-radius:0.08rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding-left: 0.1rem;
+    /* margin-bottom: .5rem; */
 }
 
 .bnt {
@@ -80,6 +81,7 @@ select {
     align-items: center;
     float: right;
     margin: 0.1rem;
+    font-weight: normal;    
 }
 .pagination input{
     text-align: center;
@@ -105,6 +107,7 @@ select {
 .pagination .list>input[type='button'] {
     font-size: inherit;
     padding: 0.0313rem 0.0521rem;
+    height: auto;
 }
 
 .modal {
@@ -156,19 +159,21 @@ select {
 }
 
 .dialog .dialog-body {
-    padding: 0.1042rem;
+    padding: 0.2rem;
     overflow: auto;
 }
 .dialog .dialog-body h5{
-    margin-bottom: 0.15rem;
-    margin-top: 0.15rem;
+    margin-bottom: 0.2rem;
+    padding-top: 0.2rem;
     letter-spacing: 2px;
     font-size: 16px;
+    border-top: 1px solid #eee;
 }
 
 .dialog .dialog-body .package-input {
     margin-bottom: 0.1042rem;
     width: 1.5625rem;
+    margin-bottom: .2rem;
 }
 
 .dialog .dialog-body .package-input input,

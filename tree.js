@@ -112,14 +112,22 @@ window.onload = function () {
         var target = e.target
         if(target.tagName == 'DIV'||target.tagName == 'I'){
             target = target.tagName=='I'?target.parentNode:target
+            highLight(target)
+            let child = target.nextElementSibling
+            if(!child){
+                target.classList.add('tree-ative')
+                return
+            }
             if(target.classList.contains('tree-menu-text')){
                 target.nextElementSibling.classList.toggle('tree-close')
                 target.lastChild.classList.toggle('tree-ico-open')
                 if(target.nextElementSibling.classList.contains('tree-close')){
                     target.nextElementSibling.style.maxHeight = '0px'
                 }else{
-                    target.nextElementSibling.style.maxHeight = treeDom.offsetHeight+'px'
+                    target.nextElementSibling.style.maxHeight = '1000px'
+                    // treeDom.offsetHeight+'px'
                 }
+                target.classList.toggle('tree-ative')
             }
         }
     },false)
@@ -135,10 +143,8 @@ function initTree(treeData, config = { label: 'name', childrens: 'childrens' }) 
             let liDom = buildContain('li')
             let textDom = buildContain('div', { innerText: menu[label],className:'tree-menu-text'})
             let IconDom = menu[childrens]&&menu[childrens].length>0?buildContain('i', {className:'tree-ico'}):buildContain('i')
-            // textDom.classList.add('tree-menu-text')
             textDom.appendChild(IconDom)
             liDom.appendChild(textDom)
-            
             let children = menu[childrens]
 
             if (children && children.length > 0) {
@@ -161,6 +167,13 @@ function initTree(treeData, config = { label: 'name', childrens: 'childrens' }) 
     return container
 }
 
+function highLight(targetEle){
+    let higthEle = document.getElementsByClassName('tree-ative')
+    for(dom of higthEle){
+        dom.classList.remove('tree-ative')
+    };
+    targetEle.classList.add('tree-active')
+}
 function buildContain(tag, property) {
     var property = property || {}
     let dom = document.createElement(tag)
@@ -169,4 +182,3 @@ function buildContain(tag, property) {
     }
     return dom
 }
-

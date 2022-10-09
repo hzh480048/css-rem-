@@ -231,6 +231,7 @@ select {
     background-color: rgba(181, 164, 164,.2);
 }
 
+
 .tree ul{
     list-style-type: none;
     padding-left: 20px;
@@ -266,7 +267,7 @@ select {
     background: url('./web/icon_filletree_01.png');
     background-size: cover;
 }
-.tree .tree-menu-text:hover{
+.tree .tree-menu-text:hover,.tree-ative{
     background-color: #f0f7ff;
     cursor: pointer;
 }

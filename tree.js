@@ -110,18 +110,15 @@ window.onload = function () {
     let treeContainer  = initTree(treeData)
     treeContainer.addEventListener('click',function(e){
         var target = e.target
-        let count = target.nextElementSibling?target.nextElementSibling.children:null
-        if(target.tagName = 'DIV'){
-
-            if(count&&target.classList.contains('tree-menu-text')){
+        if(target.tagName == 'DIV'||target.tagName == 'I'){
+            target = target.tagName=='I'?target.parentNode:target
+            if(target.classList.contains('tree-menu-text')){
                 target.nextElementSibling.classList.toggle('tree-close')
                 target.lastChild.classList.toggle('tree-ico-open')
                 if(target.nextElementSibling.classList.contains('tree-close')){
-                    target.nextElementSibling.style.height = '0px'
+                    target.nextElementSibling.style.maxHeight = '0px'
                 }else{
-                    // target.nextElementSibling.style.height = countHeght(target.nextElementSibling)
-                    // target.nextElementSibling.style.height = '150px'
-                    target.nextElementSibling.style.height = 'auto'
+                    target.nextElementSibling.style.maxHeight = treeDom.offsetHeight+'px'
                 }
             }
         }
@@ -151,7 +148,6 @@ function initTree(treeData, config = { label: 'name', childrens: 'childrens' }) 
                     liDom.classList.add('tree-close')
                     container.classList.add('tree-close')
                 }
-                // liDom.appendChild(textDom)
                 liDom.appendChild(container)
                 fragment.appendChild(liDom)
                 deep(container, children, show)
@@ -163,16 +159,6 @@ function initTree(treeData, config = { label: 'name', childrens: 'childrens' }) 
     }
     deep(container, treeData, false)
     return container
-}
-function countHeght(element){
-    let countHeght = 0
-    
-    function deepHeght(element){
-
-        count.length * count[0].offsetHeight + 'px'
-    }
-    deepHeght(element)
-    return countHeght +'px'
 }
 
 function buildContain(tag, property) {

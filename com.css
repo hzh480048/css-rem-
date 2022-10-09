@@ -157,7 +157,7 @@ select {
     position: absolute;
     right: .3rem;
     cursor: pointer;
-    transition: all .3s;
+    transition: all .4s;
 }
 
 .dialog .header .dialog-close:hover {
@@ -271,5 +271,5 @@ select {
     cursor: pointer;
 }
 .tree .tree-close>ul{
-    height: 0;
+    max-height: 0;
 }

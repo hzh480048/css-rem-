@@ -230,3 +230,7 @@ select {
     border-radius: 1em;
     background-color: rgba(181, 164, 164,.2);
 }
+.tree ul{
+    list-style-type: none;
+    padding-left: 20px;
+}

@@ -230,7 +230,46 @@ select {
     border-radius: 1em;
     background-color: rgba(181, 164, 164,.2);
 }
+
 .tree ul{
     list-style-type: none;
     padding-left: 20px;
+    transition: all .3s;
+    overflow: hidden;
+}
+.tree li{
+    /* padding: .08rem; */
+}
+.tree>ul:first-child{
+    padding-left:0px ;
+    padding: .05rem;
+}
+.tree .tree-menu{
+    /* list-style-type: disclosure-closed; */
+}
+.tree .tree-menu-text{
+    padding: .1rem;
+    position: relative;
+    padding-left: .4rem;
+}
+.tree .tree-menu-text .tree-ico{
+    position: absolute;
+    width: 0.2rem;
+    height: 0.2rem;
+    background: url('./web/icon_filletree_02.png');
+    left: 0.1rem;
+    background-size: cover;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.tree .tree-menu-text .tree-ico-open{
+    background: url('./web/icon_filletree_01.png');
+    background-size: cover;
+}
+.tree .tree-menu-text:hover{
+    background-color: #f0f7ff;
+    cursor: pointer;
+}
+.tree .tree-close>ul{
+    height: 0;
 }

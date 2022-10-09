@@ -107,7 +107,26 @@ var treeData = [
 
 window.onload = function () {
     var treeDom = document.getElementById('tree')
-    treeDom.appendChild(initTree(treeData))
+    let treeContainer  = initTree(treeData)
+    treeContainer.addEventListener('click',function(e){
+        var target = e.target
+        let count = target.nextElementSibling?target.nextElementSibling.children:null
+        if(target.tagName = 'DIV'){
+
+            if(count&&target.classList.contains('tree-menu-text')){
+                target.nextElementSibling.classList.toggle('tree-close')
+                target.lastChild.classList.toggle('tree-ico-open')
+                if(target.nextElementSibling.classList.contains('tree-close')){
+                    target.nextElementSibling.style.height = '0px'
+                }else{
+                    // target.nextElementSibling.style.height = countHeght(target.nextElementSibling)
+                    // target.nextElementSibling.style.height = '150px'
+                    target.nextElementSibling.style.height = 'auto'
+                }
+            }
+        }
+    },false)
+    treeDom.appendChild(treeContainer)
 }
 
 function initTree(treeData, config = { label: 'name', childrens: 'childrens' }) {
@@ -116,18 +135,25 @@ function initTree(treeData, config = { label: 'name', childrens: 'childrens' }) 
 
     function deep(fragment, menuList, show) {
         for (let menu of menuList) {
-            let liDom = buildContain('li', { innerText: menu[label] })
-            // fragment.appendChild(liDom)
+            let liDom = buildContain('li')
+            let textDom = buildContain('div', { innerText: menu[label],className:'tree-menu-text'})
+            let IconDom = menu[childrens]&&menu[childrens].length>0?buildContain('i', {className:'tree-ico'}):buildContain('i')
+            // textDom.classList.add('tree-menu-text')
+            textDom.appendChild(IconDom)
+            liDom.appendChild(textDom)
+            
             let children = menu[childrens]
 
             if (children && children.length > 0) {
                 liDom.classList.add('tree-menu')
-                fragment.appendChild(liDom)
                 let container = buildContain('ul')
                 if (!show) {
                     liDom.classList.add('tree-close')
+                    container.classList.add('tree-close')
                 }
-                fragment.appendChild(container)
+                // liDom.appendChild(textDom)
+                liDom.appendChild(container)
+                fragment.appendChild(liDom)
                 deep(container, children, show)
             } else {
                 liDom.classList.add('tree-menu-item')
@@ -135,9 +161,18 @@ function initTree(treeData, config = { label: 'name', childrens: 'childrens' }) 
             }
         }
     }
-    deep(container, treeData, true)
-    console.log(container)
+    deep(container, treeData, false)
     return container
+}
+function countHeght(element){
+    let countHeght = 0
+    
+    function deepHeght(element){
+
+        count.length * count[0].offsetHeight + 'px'
+    }
+    deepHeght(element)
+    return countHeght +'px'
 }
 
 function buildContain(tag, property) {
@@ -148,3 +183,4 @@ function buildContain(tag, property) {
     }
     return dom
 }
+

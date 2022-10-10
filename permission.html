@@ -161,8 +161,8 @@
         .nav {
             position: absolute;
             /* width: 2.3rem; */
-            /* width: 12vw; */
-            width: 230px;
+            width: 12vw;
+            /* width: 230px; */
             height: 100vh;
             background-color: #fff;
             border-right: 1px solid #eee;
@@ -180,6 +180,8 @@
             position: relative;
             justify-content: flex-start;
             border-radius: 2px;
+
+            width: 75%;
         }
 
         .menu-box-item:hover {
@@ -227,9 +229,11 @@
 
         .drop-menu {
             background-color: #f2f6fa;
-            height: 0px;
+            /* height: 0px; */
             overflow: hidden;
-            transition: all .35s;
+            transition: all .5s;
+            width: 75%;
+            max-height: 0;
         }
 
         .drop-menu,
@@ -243,6 +247,7 @@
 
         .drop-menu-item {
             justify-content: center;
+            width: 100%;
         }
 
         .drop-menu-item:hover {
@@ -251,7 +256,7 @@
 
         .drop-menu-item,
         .menu-box-item {
-            width: 170px;
+            /* width: 170px; */
             font-size: 18px;
             padding: 10px 6px 10px 20px;
 
@@ -273,11 +278,14 @@
             /* padding: 0.0521rem; */
             background: #fff;
             font-size: 0.0781rem;
-            width: calc(100vw - 2.6rem);
+            /* width: calc(100vw - 2.6rem); */
             margin: 0.1rem 0rem 0.1rem 0;
-            margin-left: 2.5rem;
+            /* margin-left: 2.5rem; */
             float: left;
             display: flex;
+
+            width: 86vw;
+            margin-left: 13vw;
         }
 
         .main .tree {
@@ -409,18 +417,19 @@
         let dropFlag = false;
         function toggleDrop() {
             var dom = document.getElementsByClassName('drop-menu')[0]
-            var height = document.getElementsByClassName('drop-menu-item')
+            // var height = document.getElementsByClassName('drop-menu-item')
             var ico = document.getElementsByClassName('drop-ico')[0]
             dropFlag = !dropFlag
             if (!dropFlag) {
                 dom.classList.remove('drop-menu-open')
                 ico.classList.remove('drop-ico-open')
-                dom.style.height = '0px'
+                dom.style.maxHeight = '0px'
             }
             if (dropFlag) {
                 dom.classList.add('drop-menu-open')
                 ico.classList.add('drop-ico-open')
-                dom.style.height = height.length * height[0].offsetHeight + 'px'
+                // dom.style.maxHeight = height.length * height[0].offsetHeight + 'px'
+                dom.style.maxHeight = '500px'
             }
 
         }
@@ -466,7 +475,7 @@
         <nav class="nav">
             <div class="logo"></div>
             <div class="menu-box">
-                <div>
+                <!-- <div> -->
                     <div class="menu-box-item" onclick="toggleDrop()">
                         <!-- <img src="./web/icon_menucomm_01.png"> -->
                         <div class="img"></div>
@@ -477,7 +486,7 @@
                         <div class="drop-menu-item">客户数据导入</div>
                         <div class="drop-menu-item">客户信息导入</div>
                     </div>
-                </div>
+                <!-- </div> -->
 
                 <div class="menu-box-item">
                     <div class="img"></div>

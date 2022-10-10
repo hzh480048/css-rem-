@@ -82,20 +82,21 @@
 
         .crumbs-box {
             background-color: #f2f6fa;
-            font-size: 0.12rem;
-            padding: 0.026rem 0.0781rem;
+            font-size: 15px;
+            padding: 10px 30px;
             position: relative;
-            border-radius: 0.0104rem;
+            border-radius: 3px;
             cursor: pointer;
             margin-right: 0.1042rem;
             border: 1px solid #eee;
+            font-weight:400;
         }
 
         .crumbs-box:hover {
             background-color: #a61f31;
             color: #fff;
+            box-shadow: 1px 5px 1px rgb(246 213 217 / 100%);
         }
-
         .crumbs-box:hover .close::after,
         .crumbs-box:hover .close::before {
             background-color: #fff;
@@ -108,12 +109,13 @@
             width: 1em;
             height: 1em;
             overflow: hidden;
-            vertical-align: middle;
+            vertical-align: text-top;
             text-align: center;
             cursor: pointer;
             left: 0.0156rem;
             padding: 0.0104rem;
             border-radius: 1.2em;
+            margin-left: 15px;
         }
 
         .close:hover {
@@ -124,7 +126,8 @@
         .close::before {
             content: '';
             position: absolute;
-            width: 0.0104rem;
+            /* width: 0.0104rem; */
+            width: 2px;
             height: 1em;
             background-color: inherit;
             z-index: 11;
@@ -154,7 +157,8 @@
 
         .nav {
             position: absolute;
-            width: 2.3rem;
+            /* width: 2.3rem; */
+            width: 12vw;
             height: 100vh;
             background-color: #fff;
             border-right: 1px solid #eee;
@@ -166,7 +170,6 @@
             overflow: auto;
             /* padding: 0 .3rem; */
         }
-
         .menu-box-item {
             font-size: .2rem;
             position: relative;
@@ -237,9 +240,13 @@
 
         .drop-menu-item,
         .menu-box-item {
-            width: 1.7rem;
-            /* font-size: 0.15rem; */
-            font-size: .2rem;
+            width: 8.9vw;
+            font-size: 16px;
+
+
+
+            /* width: 1.7rem; */
+            /* font-size: .2rem; */
             font-weight: bold;
             display: flex;
             /* padding: 0.0521rem; */

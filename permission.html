@@ -90,7 +90,7 @@
             border-radius: 3px;
             cursor: pointer;
             /* margin-right: .1042rem; */
-            margin-right: 15px;
+            margin-right: 10px;
             border: 1px solid #eee;
             font-weight:400;
         }
@@ -98,7 +98,7 @@
         .crumbs-box:hover {
             background-color: #a61f31;
             color: #fff;
-            box-shadow: 1px 5px 1px rgb(246 213 217 / 100%);
+            box-shadow: 0px 4px 0px rgb(246 213 217 / 100%);
         }
         .crumbs-box:hover .close::after,
         .crumbs-box:hover .close::before {
@@ -113,7 +113,7 @@
             width: 1em;
             height: 1em;
             overflow: hidden;
-            vertical-align: text-top;
+            vertical-align: middle;
             text-align: center;
             cursor: pointer;
             left: .0156rem;
@@ -132,8 +132,7 @@
             position: absolute;
             /* width: .0104rem; */
             width: 2px;
-            height: 13px;
-            background-color: inherit;
+            height: 11px;
             z-index: 11;
             background-color: black;
         }
@@ -215,7 +214,7 @@
             width: 15px;
             height: 15px;
             background: url('./web/icon_menutree_02.png');
-            right: 0.2rem;
+            right: 0.1rem;
             background-size: cover;
             top: 50%;
             transform: translateY(-50%);
@@ -258,7 +257,10 @@
         .drop-menu-item:hover {
             background-color: rgba(230, 230, 230, 1);
         }
-
+        .menu-box-item-active {
+            background-color: #a61f31;
+            color: #fff;
+        }
         .drop-menu-item,
         .menu-box-item {
             /* width: 170px; */
@@ -418,63 +420,6 @@
             min-width: 4%
         }
     </style>
-    <script>
-        let hideFrom = false
-        let index;
-        let dropFlag = false;
-        function toggleDrop() {
-            var dom = document.getElementsByClassName('drop-menu')[0]
-            // var height = document.getElementsByClassName('drop-menu-item')
-            var ico = document.getElementsByClassName('drop-ico')[0]
-            dropFlag = !dropFlag
-            if (!dropFlag) {
-                dom.classList.add('drop-menu-open')
-                ico.classList.add('drop-ico-open')
-                dom.style.maxHeight = '0px'
-            }
-            if (dropFlag) {
-                dom.classList.add('drop-menu-open')
-                ico.classList.add('drop-ico-open')
-                // dom.style.maxHeight = height.length * height[0].offsetHeight + 'px'
-                dom.style.maxHeight = '500px'
-            }
-
-        }
-        function taggleFrom(isOpen) {
-            hideFrom = isOpen
-            let dom = document.getElementsByClassName('hide-from')[0]
-            if (hideFrom == 'true') {
-                dom.style.height = 'auto'
-                dom.classList.add('close-form')
-            }
-            if (hideFrom == 'false') {
-                dom.style.height = '0px'
-                dom.classList.add('close-form')
-            }
-        }
-        function handleTip(index) {
-            let diloag = document.getElementsByClassName('modal')[index]
-            diloag.style.display = 'flex'
-        }
-        function closeTip(index) {
-            diloag = document.getElementsByClassName('modal')[index]
-            diloag.style.display = 'none'
-        }
-        function sortTable(obj) {
-            var tableNode = document.getElementsByTagName("table")[1]
-            var headRows = tableNode.rows[0].innerText.split('\t')
-            var newRows = tableNode.rows
-            index = headRows.indexOf(obj.parentNode.innerText)
-            let sortArray = Array.from(newRows).sort(sort)
-            for (let i = 0; sortArray.length > i; i++) {
-                newRows[i] = sortArray[i]
-            }
-            // document.getElementsByTagName("tbody")[1].innerHTML = sortArray
-        }
-        function sort(b, a) {
-            return a.cells[index].innerText - b.cells[index].innerText
-        }
-    </script>
 </head>
 
 <body>
@@ -482,18 +427,16 @@
         <nav class="nav">
             <div class="logo"></div>
             <div class="menu-box">
-                <!-- <div> -->
-                    <div class="menu-box-item" onclick="toggleDrop()">
-                        <!-- <img src="./web/icon_menucomm_01.png"> -->
-                        <div class="img"></div>
-                        <div>客户管理</div>
-                        <i class="drop-ico"></i>
-                    </div>
+                <!-- <div class="menu-box-item" onclick="toggleDrop()">
+                    <div class="img"></div>
+                    <div>客户管理</div>
+                    <i class="drop-ico"></i>
                     <div class="drop-menu">
                         <div class="drop-menu-item">客户数据导入</div>
                         <div class="drop-menu-item">客户信息导入</div>
                     </div>
-                <!-- </div> -->
+                </div>
+
 
                 <div class="menu-box-item">
                     <div class="img"></div>
@@ -502,7 +445,7 @@
                 <div class="menu-box-item">
                     <div class="img"></div>
                     <div>利率管理</div>
-                </div>
+                </div> -->
             </div>
         </nav>
 
@@ -1206,6 +1149,114 @@
             </div>
         </div>
     </div>
+    <script>
+        let hideFrom = false
+        let index;
+        let dropFlag = false;
+        function toggleDrop() {
+            var dom = document.getElementsByClassName('drop-menu')[0]
+            // var height = document.getElementsByClassName('drop-menu-item')
+            var ico = document.getElementsByClassName('drop-ico')[0]
+            dropFlag = !dropFlag
+            if (!dropFlag) {
+                dom.classList.add('drop-menu-open')
+                ico.classList.add('drop-ico-open')
+                dom.style.maxHeight = '0px'
+            }
+            if (dropFlag) {
+                dom.classList.add('drop-menu-open')
+                ico.classList.add('drop-ico-open')
+                // dom.style.maxHeight = height.length * height[0].offsetHeight + 'px'
+                dom.style.maxHeight = '500px'
+            }
+
+        }
+        function taggleFrom(isOpen) {
+            hideFrom = isOpen
+            let dom = document.getElementsByClassName('hide-from')[0]
+            if (hideFrom == 'true') {
+                dom.style.height = 'auto'
+                dom.classList.add('close-form')
+            }
+            if (hideFrom == 'false') {
+                dom.style.height = '0px'
+                dom.classList.add('close-form')
+            }
+        }
+        function handleTip(index) {
+            let diloag = document.getElementsByClassName('modal')[index]
+            diloag.style.display = 'flex'
+        }
+        function closeTip(index) {
+            diloag = document.getElementsByClassName('modal')[index]
+            diloag.style.display = 'none'
+        }
+        function sortTable(obj) {
+            var tableNode = document.getElementsByTagName("table")[1]
+            var headRows = tableNode.rows[0].innerText.split('\t')
+            var newRows = tableNode.rows
+            index = headRows.indexOf(obj.parentNode.innerText)
+            let sortArray = Array.from(newRows).sort(sort)
+            for (let i = 0; sortArray.length > i; i++) {
+                newRows[i] = sortArray[i]
+            }
+            // document.getElementsByTagName("tbody")[1].innerHTML = sortArray
+        }
+        function sort(b, a) {
+            return a.cells[index].innerText - b.cells[index].innerText
+        }
+
+
+
+        let menu = [
+            {id:1,name:'客户管理',img:'icon_menucomm_01.png',hoverImg:'',children:[{name:'客户数据导入'},{name:'商机管理'}]},{id:2,name:'商机管理',img:'icon_menucomm_02.png',hoverImg:''},{id:3,name:'利率管理',img:'icon_menucomm_03.png',hoverImg:''},{id:4,name:'报表管理',img:'icon_menucomm_04.png',hoverImg:''},{id:5,name:'项目库管理',img:'icon_menucomm_05.png',hoverImg:''},{id:6,name:'公司队伍管理',img:'icon_menucomm_06.png',hoverImg:'',children:[{name:'客户数据导入'},{name:'商机管理'}]},{id:7,name:'公司产品管理',img:'icon_menucomm_07.png',hoverImg:'',children:[{name:'客户数据导入'},{name:'商机管理'}]},{id:8,name:'系统管理',img:'icon_menucomm_08.png',hoverImg:''}]
+
+        function initNemu(menu){
+            let dom = document.getElementsByClassName('menu-box')[0]
+            for(menuItem of menu){
+                let container = buildContain('div',{className:'menu-box-item'})
+                let img = buildContain('div',{className:'img'})
+                img.setAttribute('style', 'background:url(./web/'+menuItem['img']+')')
+                let name = buildContain('div',{innerText:menuItem['name']})
+                let childDom = null
+                container.appendChild(img)
+                container.appendChild(name)
+                if(menuItem['children']&&menuItem['children'].length>0){
+                    let icon = buildContain('i',{className:'drop-ico'})
+                    container.appendChild(icon)
+                    childDom = buildContain('div',{className:'drop-menu menu-close'})
+                    for(child of menuItem['children']){
+                        childDom.appendChild(buildContain('div',{className:'drop-menu-item',innerText:child['name']}))
+                    }
+                }
+                dom.appendChild(container)
+                if(childDom!=null){
+                    dom.appendChild(childDom)
+                }
+                container.onclick = function(e){
+                    let target = e.target
+                    if(!e.target.classList.contains('menu-box-item')){
+                        target = target.parentNode
+                    }
+                    let menuList = document.getElementsByClassName('menu-box-item')
+                    for(item of menuList){
+                        item.classList.remove('menu-box-item-active')
+                    }
+                    target.classList.add('menu-box-item-active')
+                    if(target.nextSibling&&target.nextSibling.classList.contains('drop-menu')){
+                        if(target.nextSibling.classList.contains('menu-close')){
+                            target.nextSibling.style.maxHeight='500px'
+                            target.nextSibling.classList.remove('menu-close')
+                        }else{
+                            target.nextSibling.classList.add('menu-close')
+                            target.nextSibling.style.maxHeight='0px'
+                        }
+                    }
+                }
+            }
+        }
+            initNemu(menu)
+    </script>
 </body>
 
 </html>

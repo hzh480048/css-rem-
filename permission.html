@@ -1247,11 +1247,14 @@
                         if(target.nextSibling.classList.contains('menu-close')){
                             target.nextSibling.style.maxHeight='500px'
                             target.nextSibling.classList.remove('menu-close')
+                            target.lastChild.classList.add('drop-ico-open')
                         }else{
                             target.nextSibling.classList.add('menu-close')
                             target.nextSibling.style.maxHeight='0px'
+                            target.lastChild.classList.remove('drop-ico-open')
                         }
                     }
+                    console.log(target.lastChild)
                 }
             }
         }
